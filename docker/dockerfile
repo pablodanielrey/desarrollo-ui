@@ -1,0 +1,29 @@
+FROM node:stretch
+
+RUN apt-get update && apt-get install -y \
+  supervisor \
+  apache2 \
+  tzdata \
+  nano \
+  less \
+  mc \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+ENV TZ=America/Argentina/Buenos_Aires
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/src/node_modules/.bin/
+
+# se instala yarn para manejar los paquetes
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+RUN yarn global add @angular/cli
+RUN ng set --global packageManager=yarn
+
+COPY docker/.angular-config.json /root/
+
+WORKDIR /src
+
+EXPOSE 4200
+
+ENTRYPOINT ["/bin/bash"]
