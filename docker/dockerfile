@@ -18,9 +18,12 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/src/node_
 # se instala yarn para manejar los paquetes
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 RUN yarn global add @angular/cli
-RUN ng set --global packageManager=yarn
+#RUN ng set --global packageManager=yarn
 
 COPY docker/.angular-config.json /root/
+
+RUN yarn global add firebase-tools
+
 
 WORKDIR /src
 
