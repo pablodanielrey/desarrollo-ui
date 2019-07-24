@@ -1,4 +1,4 @@
-FROM node:stretch
+FROM node:buster
 
 RUN apt-get update && apt-get install -y \
   supervisor \
@@ -22,7 +22,7 @@ RUN yarn global add @angular/cli
 
 COPY docker/.angular-config.json /root/
 
-RUN yarn global add firebase-tools
+#RUN yarn global add firebase-tools
 
 
 WORKDIR /src
