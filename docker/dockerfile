@@ -29,7 +29,7 @@ COPY docker/.angular-config.json /root/
 
 #RUN yarn global add firebase-tools
 
-
+USER 1000
 WORKDIR /src
 
 EXPOSE 4200
